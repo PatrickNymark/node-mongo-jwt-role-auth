@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const authService = require('../services/auth.service');
-const authorize = require('../helpers/role-auth');
 
 // routes
 router.post('/user/register', registerUser);

@@ -57,5 +57,4 @@ async function loginUser(email, password) {
       token
     }
   }
-  
 }

@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const userService = require('../services/user.service');
+const authorize = require('../helpers/role-auth');
 
 // routes
 router.get('/find/:username', getByUsername);
 router.get('/id/:id', getById)
-router.get('/all', getAll);
+router.get('/all', authorize('staff'), getAll);
 module.exports = router;
 
 /**
