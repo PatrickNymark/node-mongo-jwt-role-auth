@@ -20,13 +20,12 @@ mongoose
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+// api routes
+app.use('/api/users', require('./controllers/user.controller'));
+app.use('/api/auth', require('./controllers/auth.controller'));
 
 // global error handler
 app.use(errorHandler);
-
-// api routes
-app.use('/api/users', require('./controllers/user.controller'));
-app.use('/api/auth', require('./controllers/auth.controller'))
 
 // start server
 const port = 5000 || process.env.PORT;
