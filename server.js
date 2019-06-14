@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose')
-//const jwt = require('_helpers/jwt');
-//const errorHandler = require('_helpers/error-handler');
+const errorHandler = require('./helpers/error-handler');
+
 
 const app = express();
 
@@ -16,18 +16,16 @@ mongoose
   .then(res => console.log('Database connected'))
   .catch(err => console.log(err));
 
-
+// body parser
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// use JWT auth to secure the api
-//app.use(jwt());
-
 // api routes
-//app.use('/users', require('./users/users.controller'));
+app.use('/api/users', require('./controllers/user.controller'));
+app.use('/api/auth', require('./controllers/auth.controller'));
 
 // global error handler
-//app.use(errorHandler);
+app.use(errorHandler);
 
 // start server
 const port = 5000 || process.env.PORT;
