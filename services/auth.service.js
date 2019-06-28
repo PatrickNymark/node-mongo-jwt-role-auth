@@ -31,12 +31,23 @@ async function registerUser(userData) {
  * @returns A Promise or exception.
  */
 async function registerStaff(staffData) {
-  // get user 
-  const user = await User.findById(staffData.user);
-  // update user with staff
-  user.roles.staff = staffData.user;
-
   const staff = new Staff(staffData);
+  const user = await User.findById(staffData.user);
+
+   // check if user exists 
+   if(!user) {
+    throw 'User id "' + staffData.user + '" not found'; 
+  }
+
+  // check if a staff is already connected
+  if(user.roles.staff) {
+    throw 'User id "' + staffData.user + '" is already connected to Staff id "' + user.roles.staff + '"';
+  }
+
+  // update user with staff
+  user.roles.staff = staff.id;
+  await user.save();
+
   return await staff.save();
 }
 

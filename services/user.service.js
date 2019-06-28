@@ -12,7 +12,7 @@ module.exports = {
  * @returns A Promise or exception.
  */
 async function getByUsername(username) {
-  return await User.find({ name: username }).exec(); 
+  return await User.find({ name: username }).select('-password') 
 }
 
 /**
@@ -21,7 +21,7 @@ async function getByUsername(username) {
  * @returns A Promise or exception
  */
 async function getById(id) {
-  return await User.findById(id).exec();
+  return await User.findById(id).select('-password');
 }
 
 /**
@@ -29,7 +29,7 @@ async function getById(id) {
  * @returns A Promise or exception
  */  
 async function getAll() {
-  return await User.find().exec();
+  return await User.find().select('-password');
 }
 
 
