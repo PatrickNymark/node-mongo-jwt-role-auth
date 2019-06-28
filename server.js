@@ -1,12 +1,15 @@
 const express = require('express');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const logger = require('morgan');
 const errorHandler = require('./helpers/error-handler');
-
 
 const app = express();
 
 // .env config
 require('dotenv').config();
+
+// logger config
+app.use(logger('dev'));
 
 // database config
 mongoose
